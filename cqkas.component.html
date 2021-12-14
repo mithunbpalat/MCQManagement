@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Questions Mannually KAS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">  
+    
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+    <div class="container-fluid">
+        <h1 style="text-align: center;font-size: 50px;">MULTIPLE CHOICE QUESTIONS MANAGEMENT</h1><br>
+        <ul class="nav nav-pills nav-justified">
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/udc">Create Questions Mannually</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/uploadquestions">Upload Questions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " routerLink="/adminlogin">Logout</a>
+          </li>
+        </ul><br><br><br>
+        <h1 style="text-align: center;">CREATE QUESTIONS MANNUALLY</h1><br>
+        <div style="background-color: antiquewhite;padding:5px;">
+        <h2> Select Category</h2>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/udc">UDC</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/lastgrade">Last Grade</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/kas">KAS</a>
+          </li>
+        </ul>
+
+        <h3 style="text-align: center;">KAS</h3><br><br>
+        <h3 style="text-align: center;">Enter Category details and Add Questions</h3><br>
+        <div class="row">
+          <div class="col-sm-4">
+            <div style="border: 2px solid white;border-radius: 5px;padding: 5px;">
+            <form action="#">
+              <div class="form-group">
+                <label for="options">KID :</label><br>
+                <input type="number" class="form-control" [(ngModel)]="kasdetail.kid" placeholder="Enter Kid" id="options" name="options" >
+              </div><br>
+              <div class="form-group">
+                <label for="options">Number of Options :</label><br>
+                <input type="number" class="form-control" placeholder="Enter Number of Options" id="options" name="options" value="5" disabled>
+              </div><br>
+              <div class="form-group">
+                <label for="qname">Question Paper Name :</label><br>
+                <input type="text" class="form-control" [(ngModel)]="kasdetail.questionpapername" placeholder="Enter Question Paper Name" id="qname" name="qname" required>
+              </div><br>
+              <div class="form-group">
+                <label for="lang">Language :</label><br>
+                <input type="text" class="form-control" [(ngModel)]="kasdetail.language" placeholder="Enter Language of Question Paper" id="lang" name="lang" required>
+              </div><br>
+              <div class="form-group">
+                <label for="pattern">Question Pattern :</label><br>
+                <select name="pattern" class="custom-select" [(ngModel)]="kasdetail.pattern" required>
+                  <option selected>Enter Question Pattern A,B,C,D</option>
+                  <option value="a">A</option>
+                  <option value="b">B</option>
+                  <option value="c">C</option>
+                  <option value="d">D</option>
+                </select><br>
+              </div><br>
+              <button type="submit" class="btn btn-primary" (click)="KasNow()">Submit</button>
+              <button type="submit" class="btn btn-warning" (click)="updateKasNow()">Edit</button>
+            </form>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div style="border: 2px solid white;border-radius: 5px;padding: 5px;">
+              <form action="#">
+              <div class="form-group">
+                <label for="sino">Question Serial Number :</label><br>
+                <input type="number" class="form-control" [(ngModel)]="kasquestion.qid" placeholder="Enter Question Serial Number while Editing" id="sino" name="sino" required>
+              </div><br>
+              <div class="form-group">
+                <label for="question">Question :</label><br>
+                <textarea class="form-control" style="height: 80px;" [(ngModel)]="kasquestion.question" placeholder="Enter Question in Required Language" id="question" name="question" required></textarea>
+              </div><br>
+              <h5>Enter Options</h5><br>
+              <table>
+                <tr>
+                    <td><div class="form-group">
+                    <label for="optionA">Enter Option A :</label><br>
+                    <input type="text" class="form-control" [(ngModel)]="kasquestion.a" placeholder="Enter Option A" id="optionA" name="optionA" required>
+                    </div><br></td>
+                    <td><div class="form-group">
+                    <label for="optionB">Enter Option B :</label><br>
+                    <input type="text" class="form-control" [(ngModel)]="kasquestion.b" placeholder="Enter Option B" id="optionB" name="optionB" required>
+                    </div><br></td>
+                    <td><div class="form-group">
+                    <label for="optionC">Enter Option C :</label><br>
+                    <input type="text" class="form-control" [(ngModel)]="kasquestion.c" placeholder="Enter Option C" id="optionC" name="optionC" required>
+                    </div><br></td>
+                    <td><div class="form-group">
+                    <label for="optionA">Enter Option D :</label><br>
+                    <input type="text" class="form-control" [(ngModel)]="kasquestion.d" placeholder="Enter Option D" id="optionD" name="optionD" required>
+                    </div><br></td>
+                    <td><div class="form-group">
+                    <label for="optionE">Enter Option E :</label><br>
+                    <input type="text" class="form-control" [(ngModel)]="kasquestion.e" placeholder="Enter Option E" id="optionE" name="optionE" required>
+                    </div><br></td>
+                </tr>
+                </table>
+                <h5>Correct Answer</h5><br> 
+                <table>
+                <tr>
+                    <td><div class="form-group">
+                    <label for="answercode">Enter Correct Answer Code :</label><br>
+                    <input type="text" class="form-control" [(ngModel)]="kasquestion.correctcode" placeholder="Enter Answer Code A,B,C,D,E" id="answercode" name="answercode" required>
+                    </div><br></td>
+                    <td><div class="form-group">
+                    <label for="answer">Enter Correct Answer :</label><br>
+                    <input type="text" class="form-control" [(ngModel)]="kasquestion.correctanswer" placeholder="Enter Correct Answer" id="answer" name="answer" required>
+                    </div><br></td>
+                </tr>         
+              </table>
+              <button type="submit" class="btn btn-primary" (click)="KasquestionNow()">Add Question</button>
+              <button type="submit" class="btn btn-warning" (click)="updateKasquestionNow()">Edit Question</button>
+            </form>
+            </div>
+          </div>
+        </div>
+<br><br><br>
+        <h3 style="text-align: center;">Category Details</h3><br><br>
+        <div class="row">
+           <div class="col-sm">
+            <table class="table table-dark table-responsive-sm">
+            <thead>
+              <tr>
+                <th>KID</th>
+                <th>Question Paper Name</th>
+                <th>Language</th>
+                <th>Pattern</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let kasdetail of kasdetails">
+                <td>{{kasdetail.kid}}</td>
+                <td>{{kasdetail.questionpapername}}</td>
+                <td>{{kasdetail.language}}</td>
+                <td>{{kasdetail.pattern}}</td>
+                <td class="text-center"><button class="btn btn-danger btn-xs" (click)="delKas(kasdetail.kid)" ><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+              </tr>
+            </tbody>
+            </table><br><br><br>
+            <h3 style="text-align: center;">Add Category Details to Question Paper</h3><br><br>
+            <div class="form-group">
+              <label for="search">Search Category details By KID:</label><br>
+              <input type="number" class="form-control" placeholder="Search By KID" [(ngModel)]="search1.a" id="search" name="search"><br>
+              <button class="btn btn-info btn-xs" (click)="searchByKId(search1.a)"><span class="glyphicon glyphicon-remove"></span> Search</button> <br><br>
+            </div>
+           </div>
+        </div>
+<br><br><br>
+
+        <h3 style="text-align: center;">Answer Key and Question Paper</h3><br><br>
+        <div class="row">
+          <div class="col-sm-1">
+            <div style="border: 2px solid white;padding: 5px;">
+            <h5>Answer Key</h5><br>
+            <table>
+              <thead>
+                <tr>
+                  <th>SINO</th>
+                  <th>Code</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let kasquestion of kasquestions">
+                  <td>{{kasquestion.qid}}</td>
+                  <td>{{kasquestion.correctcode}}</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+          <div class="col-sm-11">
+            <div style="padding: 10px;border: 2px solid white;">
+            <h2 style="text-align: center;">Question Paper:{{kasdetail.kid}}</h2><br>
+            <h4>Question Paper Name:{{kasdetail.questionpapername}}</h4>
+            <h4>Language:{{kasdetail.language}}</h4>
+            <h4>Question Pattern:{{kasdetail.pattern}}</h4>
+            <table class="table table-dark table-responsive-sm">
+              <thead>
+                <tr>
+                <th>Qid</th>
+                <th>Question</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let kasquestion of kasquestions">
+                  <td style="width:30px;font-size: 40px;"><div>{{kasquestion.qid}}</div></td>
+                  <td style="width:1200px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;">{{kasquestion.question}}</td>
+                  <td style="width:250px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;"><div><input type="radio" id="a" name="a" value="a"> {{kasquestion.a}}</div></td>
+                  <td style="width:250px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;"><div><input type="radio" id="a" name="a" value="a">{{kasquestion.b}}</div></td>
+                  <td style="width:250px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;"><div><input type="radio" id="a" name="a" value="a">{{kasquestion.c}}</div></td>
+                  <td style="width:250px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;"><div><input type="radio" id="a" name="a" value="a">{{kasquestion.d}}</div></td>
+                  <td style="width:250px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;"><div><input type="radio" id="a" name="a" value="a">{{kasquestion.e}}</div></td>
+                  <td class="text-center"><button class="btn btn-danger btn-xs" (click)="delKasquestion(kasquestion.qid)"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            </div>
+          </div><br><br><br>
+          <div class="row">
+            <div class="col-sm">
+      <h3 style="text-align: center;">Search Questions By QID</h3><br><br>
+      <div class="form-group">
+        <label for="search">Search By QID:</label><br>
+        <input type="number" class="form-control" placeholder="Search By QID" [(ngModel)]="search2.a" id="search" name="search"><br>
+        <button class="btn btn-info btn-xs" (click)="searchById(search2.a)"><span class="glyphicon glyphicon-remove"></span> Search</button> <br><br>
+      </div>  <br>       
+      <table class="table table-dark table-responsive-sm">
+        <thead>
+          <tr>
+          <th>Qid</th>
+          <th>Question</th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+          <th>E</th>
+          <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr >
+            <td style="width:30px;font-size: 40px;"><div>{{kasquestion.qid}}</div></td>
+            <td style="width:1200px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;">{{kasquestion.question}}</td>
+            <td style="width:250px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;"><div><input type="radio" id="a" name="a" value="a"> {{kasquestion.a}}</div></td>
+            <td style="width:250px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;"><div><input type="radio" id="a" name="a" value="a">{{kasquestion.b}}</div></td>
+            <td style="width:250px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;"><div><input type="radio" id="a" name="a" value="a">{{kasquestion.c}}</div></td>
+            <td style="width:250px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;"><div><input type="radio" id="a" name="a" value="a">{{kasquestion.d}}</div></td>
+            <td style="width:250px;font-size: 25px;height:200px;word-break: break-all;word-wrap: break-word;"><div><input type="radio" id="a" name="a" value="a">{{kasquestion.e}}</div></td>
+            <td class="text-center"><button class="btn btn-danger btn-xs" (click)="delKasquestion(kasquestion.qid)"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+  </div> <br><br><br>         
